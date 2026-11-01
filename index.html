@@ -141,13 +141,20 @@
     </section>
 
     <section class="intake section-pad" id="intake">
-      <div class="intake-copy reveal"><div class="section-index">07 / 免費健檢</div><h2>先用 2 分鐘，<br>準備你的健檢資料。</h2><p>選擇目前最卡的流程與問題，系統會產生一份企業流程健檢摘要，讓後續盤點直接從具體問題開始。</p><div class="privacy-note"><i>✓</i><span>內容只在你的瀏覽器中產生，<br>不會自動傳送。</span></div></div>
+      <div class="intake-copy reveal"><div class="section-index">07 / 免費健檢</div><h2>先用 2 分鐘，<br>準備你的健檢資料。</h2><p>選擇目前最卡的流程與問題，留下聯絡方式並簡單描述需求，我們會在 1 個工作天內與你聯繫，並附上企業流程健檢摘要。</p><div class="privacy-note"><i>✓</i><span>送出後內容只會寄給順流團隊，<br>僅用於回覆你的需求。</span></div></div>
       <form class="intake-form reveal delay-1" id="intake-form">
         <label><span>01</span>最想改善的工作<select id="need"><option>內部文件搜尋與知識問答</option><option>客服回覆與案件分類</option><option>業務資料整理與提案產出</option><option>報表、表單與資料輸入</option><option>內容產出與審核流程</option><option>其他重複性工作</option></select></label>
         <label><span>02</span>目前主要問題<select id="pain"><option>花費太多人工作業時間</option><option>資料分散，找不到正確版本</option><option>品質依賴個人經驗</option><option>回覆或處理速度太慢</option><option>既有系統無法互通</option></select></label>
         <label><span>03</span>預計使用人數<select id="team"><option>1–10 人</option><option>11–30 人</option><option>31–100 人</option><option>100 人以上</option></select></label>
         <label><span>04</span>希望開始時間<select id="timing"><option>一個月內</option><option>1–3 個月</option><option>3–6 個月</option><option>先評估可行性</option></select></label>
-        <button class="button button-primary full" type="submit">取得免費健檢準備清單 <span>↗</span></button>
+        <label><span>05</span>聯絡人姓名<input id="c-name" name="name" type="text" required autocomplete="name" placeholder="例如：王小明"></label>
+        <label><span>06</span>公司／單位<input id="c-company" name="company" type="text" autocomplete="organization" placeholder="選填"></label>
+        <label><span>07</span>Email<input id="c-email" name="email" type="email" required autocomplete="email" placeholder="we@example.com"></label>
+        <label><span>08</span>電話或 LINE<input id="c-phone" name="phone" type="text" autocomplete="tel" placeholder="選填，方便聯繫的方式"></label>
+        <label class="msg"><span>09</span>需求說明<textarea id="c-message" name="message" rows="4" required placeholder="簡單描述目前的流程、遇到的問題，或想先了解的事"></textarea></label>
+        <input type="text" name="_honey" id="c-honey" tabindex="-1" autocomplete="off" style="display:none">
+        <button class="button button-primary full" type="submit">送出需求並取得健檢清單 <span>↗</span></button>
+        <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
       </form>
       <div class="summary-card" id="summary-card" aria-live="polite"><div class="summary-head"><span>企業 AI 流程健檢摘要</span><button id="close-summary">×</button></div><pre id="summary-text"></pre><div class="summary-actions"><button class="button button-primary" id="copy-summary">複製摘要</button><button class="button button-ghost" id="download-summary">下載文字檔</button></div></div>
     </section>

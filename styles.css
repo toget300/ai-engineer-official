@@ -14,3 +14,6 @@
 @media(max-width:650px){.case-study{padding-top:80px;padding-bottom:80px}.case-intro h2{font-size:40px;letter-spacing:-2px}.case-system{padding:22px;box-shadow:9px 9px 0 #dfe1d7}.case-modules{grid-template-columns:1fr}.case-modules article:nth-child(even){padding-left:0;border-left:0}.case-system .button{gap:10px;padding:14px}}
 
 .logo img{display:block;border-radius:9px}
+
+.intake-form input,.intake-form textarea{border:0;background:#f2f3ee;padding:12px;color:var(--ink);font:12px var(--sans);outline:0;width:100%}.intake-form textarea{resize:vertical}.intake-form label.msg{align-items:start}.form-status{margin:16px 0 0;font-size:12px;line-height:1.7;color:var(--green)}.form-status a{color:var(--ink);font-weight:700}
+@media(max-width:650px){.intake-form input,.intake-form textarea{grid-column:2;margin-top:8px}}

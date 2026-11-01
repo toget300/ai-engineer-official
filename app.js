@@ -9,7 +9,21 @@ document.querySelectorAll('[data-demo]').forEach(button=>button.addEventListener
 const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}}),{threshold:.12});document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 const form=document.querySelector('#intake-form'),summaryCard=document.querySelector('#summary-card'),summaryText=document.querySelector('#summary-text');
 function buildSummary(){const date=new Intl.DateTimeFormat('zh-TW',{dateStyle:'long'}).format(new Date());return`企業 AI 流程健檢摘要\n建立日期：${date}\n優惠方案：限時免費企業健檢\n\n一、想盤點的流程\n${document.querySelector('#need').value}\n\n二、目前主要卡點\n${document.querySelector('#pain').value}\n\n三、預計使用規模\n${document.querySelector('#team').value}\n\n四、希望開始時間\n${document.querySelector('#timing').value}\n\n健檢前準備\n1. 指定一位熟悉流程的窗口\n2. 準備實際紙本、表單或資料範例\n3. 列出流程的開始、處理與完成方式\n4. 標記最常等待、重做或人工搬資料的環節\n\n預期健檢輸出\n・流程卡點圖\n・優化優先順序\n・自動化與 AI 可行性建議`}
-form.addEventListener('submit',e=>{e.preventDefault();summaryText.textContent=buildSummary();summaryCard.classList.add('show');summaryCard.scrollIntoView({behavior:'smooth',block:'center'})});
+const MAIL_TO='toget300@gmail.com',formStatus=document.querySelector('#form-status');
+function contactBlock(){const v=id=>document.querySelector(id).value.trim()||'（未填）';return`聯絡人：${v('#c-name')}
+公司／單位：${v('#c-company')}
+Email：${v('#c-email')}
+電話或 LINE：${v('#c-phone')}
+
+需求說明：
+${v('#c-message')}
+
+`}
+form.addEventListener('submit',async e=>{e.preventDefault();if(document.querySelector('#c-honey').value)return;const button=form.querySelector('button[type=submit]'),text=contactBlock()+buildSummary();summaryText.textContent=buildSummary();button.disabled=true;formStatus.textContent='送出中…';
+ try{const res=await fetch('https://formsubmit.co/ajax/'+MAIL_TO,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({_subject:'【順流官網】新的需求諮詢：'+document.querySelector('#c-name').value.trim(),_template:'box',_replyto:document.querySelector('#c-email').value.trim(),姓名:document.querySelector('#c-name').value.trim(),公司:document.querySelector('#c-company').value.trim(),Email:document.querySelector('#c-email').value.trim(),電話或LINE:document.querySelector('#c-phone').value.trim(),需求說明:document.querySelector('#c-message').value.trim(),健檢摘要:text})});const data=await res.json();if(!res.ok||data.success==='false'||data.success===false)throw new Error(data.message||'send failed');
+  formStatus.textContent='已送出！我們會在 1 個工作天內與你聯繫，下方是你的健檢準備清單。';form.reset();summaryCard.classList.add('show');summaryCard.scrollIntoView({behavior:'smooth',block:'center'})}
+ catch(err){const href='mailto:'+MAIL_TO+'?subject='+encodeURIComponent('【順流官網】需求諮詢')+'&body='+encodeURIComponent(text);formStatus.innerHTML='自動送出失敗，請改用 <a href="'+href+'">寄信給我們</a>（內容已帶入），或直接寄到 '+MAIL_TO+'。';summaryCard.classList.add('show')}
+ finally{button.disabled=false}});
 document.querySelector('#close-summary').addEventListener('click',()=>summaryCard.classList.remove('show'));
 const toast=document.querySelector('#toast');function showToast(message){toast.textContent=message;toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),1800)}
 document.querySelector('#copy-summary').addEventListener('click',async()=>{await navigator.clipboard.writeText(summaryText.textContent);showToast('需求摘要已複製')});
