@@ -1,0 +1,42 @@
+/* 視覺圖解：導入前後、強項圖示、案例系統圖 */
+.strengths{padding-top:110px;padding-bottom:110px}
+.ba-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.ba-card{background:white;border:1px solid var(--line);padding:22px 22px 18px}
+.ba-card.after{background:var(--dark);color:white;border-color:var(--dark)}
+.ba-card header{display:flex;justify-content:space-between;align-items:center;font:10px var(--mono);letter-spacing:1.2px;color:var(--muted);margin-bottom:6px}
+.ba-card.after header{color:var(--acid)}
+.ba-card svg{width:100%;height:auto;display:block}
+.ba-foot{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.ba-foot span{font:10px var(--mono);border:1px solid var(--line);padding:6px 9px;color:var(--muted)}
+.ba-card.after .ba-foot span{border-color:#3b664f;color:var(--acid)}
+.ba-card .t{font:600 13px var(--sans);fill:var(--ink)}
+.ba-card.after .t{fill:#e6efe9}
+.ba-card .t-s{font:10px var(--mono);fill:var(--muted)}
+.ba-card.after .t-s{fill:#86a894}
+.ba-card .nd{fill:#f2f2ec;stroke:#c9ccc2}
+.ba-card.after .nd{fill:#103122;stroke:#365547}
+.ba-card .tangle{stroke:#ff7548;stroke-width:1.4;fill:none;stroke-dasharray:4 4;opacity:.85}
+.ba-card .clean{stroke:var(--acid);stroke-width:1.6;fill:none}
+.ba-card .flow-dash{stroke-dasharray:6 6;animation:dashmove 1.4s linear infinite}
+@keyframes dashmove{to{stroke-dashoffset:-24}}
+.str-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.str-card{background:white;border:1px solid var(--line);padding:26px 22px 24px;display:flex;flex-direction:column}
+.str-card svg{width:64px;height:64px;margin-bottom:22px}
+.str-card h3{font-size:20px;margin:0 0 6px;letter-spacing:-.5px}
+.str-card p{font-size:12px;color:var(--muted);line-height:1.7;margin:0 0 16px}
+.str-card .meter{margin-top:auto;font:9px var(--mono);color:var(--green)}
+.str-card .meter i{display:block;height:5px;background:#e3e6de;margin-top:7px;position:relative;overflow:hidden}
+.str-card .meter i:after{content:"";position:absolute;inset:0;width:var(--w,80%);background:var(--green)}
+.str-card:hover{border-color:var(--green)}
+.hub{margin:6px 0 22px;background:#0f2a1e;border:1px solid #274a39;padding:6px}
+.hub svg{width:100%;height:auto;display:block}
+.hub .hl{stroke:#3b664f;stroke-width:1.2}
+.hub .hl.on{stroke:var(--acid);stroke-dasharray:5 5;animation:dashmove 1.6s linear infinite}
+.hub .core{fill:var(--acid)}
+.hub .core-t{font:800 15px var(--sans);fill:var(--ink)}
+.hub .nd{fill:#103122;stroke:#4d7a62}
+.hub .nt{font:600 12px var(--sans);fill:#e6efe9}
+.hub .ns{font:9px var(--mono);fill:#86a894}
+@media(max-width:1000px){.ba-grid{grid-template-columns:1fr}.str-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:650px){.strengths{padding-top:75px;padding-bottom:75px}.str-grid{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.ba-card .flow-dash,.hub .hl.on{animation:none}}
